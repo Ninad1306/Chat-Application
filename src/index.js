@@ -22,14 +22,14 @@ io.on('connection', (socket) => {
         }
         socket.join(user.room)
 
-        socket.emit("message", generateText('Welcome'))
-        socket.broadcast.to(user.room).emit('message', generateText(`${user.username} has joined`))
+        socket.emit("message", generateText('Admin', 'Welcome'))
+        socket.broadcast.to(user.room).emit('message', generateText('Admin', `${user.username} has joined`))
         callback()
     })
 
     socket.on('sendMessage', (msg, callback) => {
         const user = getUser(socket.id)
-        io.to(user.room).emit("message", generateText(msg))
+        io.to(user.room).emit("message", generateText(user.username, msg))
         callback("Delivered")
     })
 
@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         const user = removeUser(socket.id)
         if(user){
-            io.to(user.room).emit('message', generateText(`${user.username} has left!`))
+            io.to(user.room).emit('message', generateText('Admin', `${user.username} has left!`))
         }
     })
 })

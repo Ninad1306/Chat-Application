@@ -1,5 +1,6 @@
-const generateText = (text) => {
+const generateText = (username, text) => {
     return {
+        username,
         text,
         currTime: new Date().getTime()
     }
