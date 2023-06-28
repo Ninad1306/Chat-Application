@@ -48,10 +48,6 @@ const getUsersInRoom = (room) => {
     room = room.trim().toLowerCase()
     const roomUsers = users.filter(user => user.room === room)
 
-    if(!roomUsers){
-        return {error: "No users in room."}
-    }
-
     return roomUsers
 }
 
