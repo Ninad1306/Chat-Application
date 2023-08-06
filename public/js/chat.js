@@ -35,11 +35,9 @@ const autoscroll = () => {
         messages.scrollTop = messages.scrollHeight
     }
 
-    // console.log(newMessageStyles)
 }
 
 socket.on('message', (msg) => {
-    console.log(msg)
     const html = Mustache.render(messageTemplate, {
         username: msg.username,
         message: msg.text,
@@ -55,7 +53,6 @@ socket.on('roomData', ({ room, users }) => {
         users
     })
     document.getElementById('sidebar').innerHTML = html
-        // console.log(users)
 
 })
 
@@ -64,7 +61,6 @@ messageForm.addEventListener('submit', (e) => {
     msgSend.setAttribute('disabled', 'disabled')
 
     socket.emit('sendMessage', msgInp.value, (msg) => {
-        console.log(msg)
         msgInp.value = ''
         msgSend.removeAttribute('disabled')
     })
@@ -87,10 +83,8 @@ userLoc.addEventListener('click', () => {
     userLoc.setAttribute('disabled', 'disabled')
     navigator.geolocation.getCurrentPosition((position) => {
         socket.emit('location', { lat: position.coords.latitude, long: position.coords.longitude }, () => {
-            console.log('Location Shared!')
             userLoc.removeAttribute('disabled')
         })
-        // console.log(position)
     })
 })
 

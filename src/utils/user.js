@@ -1,4 +1,7 @@
-const users = []
+// const Axios = require('axios')
+const users = require('./user.json')
+
+// const users = []
 
 const addUser = ({ id, username, room }) => {
     username = username.trim().toLowerCase()
@@ -19,6 +22,11 @@ const addUser = ({ id, username, room }) => {
     }
 
     const user = { id, username, room }
+    // const response = await Axios.post('http://localhost:5000/users',{
+    //     id,
+    //     username,
+    //     room
+    // })
 
     users.push(user)
     return { user }
@@ -31,6 +39,9 @@ const removeUser = (id) => {
         return users.splice(index, 1)[0]
     }
 
+    // const user = await Axios.delete('http://localhost:5000/users/' + id)
+
+    // return user
 }
 
 const getUser = (id) => {
@@ -40,6 +51,8 @@ const getUser = (id) => {
             error: "No user found."
         }
     }
+
+    // const user = await Axios.get('http://localhost:5000/users/' + id)
     
     return user
 }
@@ -47,7 +60,9 @@ const getUser = (id) => {
 const getUsersInRoom = (room) => {
     room = room.trim().toLowerCase()
     const roomUsers = users.filter(user => user.room === room)
-
+    // const roomUsers = await Axios.get('http://localhost:5000/users',{
+    //     room
+    // })
     return roomUsers
 }
 

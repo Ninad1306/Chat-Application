@@ -12,7 +12,6 @@ const io = socketio(server)
 const port = process.env.PORT || 3000
 
 io.on('connection', (socket) => {
-    // console.log("Client connected")
 
     socket.on('join', ({ username, room },callback) => {
         const {error, user} = addUser({id: socket.id, username, room})
